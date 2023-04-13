@@ -92,8 +92,10 @@ local plugins = {
   { "windwp/nvim-ts-autotag", after = "nvim-treesitter" }, -- autoclose tags
 
   -- git integration
-  "lewis6991/gitsigns.nvim" -- show line modifications on left hand side
+  "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
 
+  -- 42 header
+  "42Paris/42header"
 }
 
 local opts = {}
