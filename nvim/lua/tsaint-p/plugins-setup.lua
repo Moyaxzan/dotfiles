@@ -95,7 +95,13 @@ local plugins = {
   "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
 
   -- 42 header
-  "42Paris/42header"
+  "42Paris/42header",
+
+  -- vim-visual-multi
+  "mg979/vim-visual-multi",
+
+  --git blame
+  "f-person/git-blame.nvim"
 }
 
 local opts = {}
