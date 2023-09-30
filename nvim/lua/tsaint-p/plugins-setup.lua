@@ -71,7 +71,6 @@ local plugins = {
       { "nvim-treesitter/nvim-treesitter" },
     },
   }, -- enhanced lsp uis
-  "jose-elias-alvarez/typescript.nvim", -- additional functionality for typescript server (e.g. rename file & update imports)
   "onsails/lspkind.nvim",
 
   -- formatting & linting
@@ -101,7 +100,10 @@ local plugins = {
   "mg979/vim-visual-multi",
 
   --git blame
-  "f-person/git-blame.nvim"
+  "f-person/git-blame.nvim",
+
+  -- git signs
+  "mhinz/vim-signify",
 }
 
 local opts = {}
