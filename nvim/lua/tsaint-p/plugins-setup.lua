@@ -31,13 +31,13 @@ local plugins = {
   -- Discord presence
   'andweeb/presence.nvim',
 
-  -- commenting with gc
+  -- commenting with gc<MOTION> or gcc for line
   "numToStr/Comment.nvim",
 
   -- file explorer
   "nvim-tree/nvim-tree.lua",
 
-  -- vs-code like icons
+  -- icons
   "nvim-tree/nvim-web-devicons",
 
   -- statusline
@@ -90,7 +90,7 @@ local plugins = {
   "windwp/nvim-autopairs", -- autoclose parens, brackets, quotes, etc...
   { "windwp/nvim-ts-autotag", after = "nvim-treesitter" }, -- autoclose tags
 
-  -- git integration
+  -- git signs in file
   "lewis6991/gitsigns.nvim", -- show line modifications on left hand side
 
   -- 42 header
@@ -99,11 +99,8 @@ local plugins = {
   -- vim-visual-multi
   "mg979/vim-visual-multi",
 
-  --git blame
-  "f-person/git-blame.nvim",
-
-  -- git signs
-  "mhinz/vim-signify",
+  -- harpoon
+  "theprimeagen/harpoon"
 }
 
 local opts = {}

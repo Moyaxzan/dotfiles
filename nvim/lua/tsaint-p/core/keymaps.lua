@@ -1,5 +1,11 @@
 vim.g.mapleader = " "
 
+vim.cmd([[
+set runtimepath^=/etc/.vim runtimepath+=/etc/.vim/after
+let &packpath = &runtimepath
+source /etc/vim/vimrc
+]])
+
 local keymap = vim.keymap
 
 -- general keymap
@@ -25,6 +31,8 @@ keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
+-- terminal 
+keymap.set("t", "Esc", "<C-\\><C-n>") -- go back to normal mode
 ---------------------
 -- plugins keymaps --
 ---------------------
