@@ -1,0 +1,69 @@
+{
+   "checksum": "357a6ba3dfd212076884e5c0b7ea3b3c",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13346511093047411",
+            "date_last_used": "13346622249485845",
+            "guid": "fa511a45-e549-4ea7-bd12-011d5923599f",
+            "id": "6",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Discord",
+            "type": "url",
+            "url": "https://discord.com/channels/@me"
+         }, {
+            "date_added": "13346511129003153",
+            "date_last_used": "13346620194868743",
+            "guid": "dc19f86f-a45d-448b-a87a-17e320da8656",
+            "id": "7",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "GitHub",
+            "type": "url",
+            "url": "https://github.com/"
+         }, {
+            "date_added": "13346620204470681",
+            "date_last_used": "13346889419367974",
+            "guid": "f52536ac-208b-44a9-9a97-a37921158329",
+            "id": "9",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "dotfiles la sauce",
+            "type": "url",
+            "url": "https://github.com/Lasauce6/dotfiles"
+         } ],
+         "date_added": "13346511004687933",
+         "date_last_used": "0",
+         "date_modified": "13346620204470681",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Bookmarks bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13346511004687935",
+         "date_last_used": "0",
+         "date_modified": "13346511093047411",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13346511004687936",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}
