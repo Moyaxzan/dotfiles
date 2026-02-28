@@ -1,75 +1,84 @@
--- import lspconfig plugin safely
-local lspconfig_status, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status then
+-- import cmp-nvim-lsp safely
+local cmp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_status then
   return
 end
 
--- import cmp-nvim-lsp plugin safely
-local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not cmp_nvim_lsp_status then
-  return
-end
+local keymap = vim.keymap
 
-local keymap = vim.keymap -- for conciseness
-
--- enable keybinds only for when lsp server available
-local on_attach = function(bufnr)
-  -- keybind options
+-- on_attach
+local on_attach = function(_, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  -- set keybinds
-  keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts) -- show definition, references
-  keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts) -- got to declaration
-  keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) -- see definition and make edits in window
-  keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts) -- go to implementation
-  keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) -- see available code actions
-  keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts) -- smart rename
-  keymap.set("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
-  keymap.set("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
-  keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
-  keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
-  keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
-  keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
-
-
+  keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+  keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+  keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+  keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 end
 
--- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- Change the Diagnostic symbols in the sign column (gutter)
--- (not in youtube nvim video)
+-- diagnostic icons
 local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+	vim.diagnostic.config({
+	  virtual_text = {
+		prefix = "●", -- peut être "●", "▎", "■", etc.
+		spacing = 4,
+	  },
+	  signs = true,
+	  underline = true,
+	  severity_sort = true,
+	})
 end
 
--- configure clongd
-lspconfig["clangd"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-	cmd = { "clangd"}
-})
-
--- configure lua server (with special settings)
-lspconfig["lua_ls"].setup({
+-- =========================
+-- CLANGD
+-- =========================
+vim.lsp.config("clangd", {
   capabilities = capabilities,
   on_attach = on_attach,
-  settings = { -- custom settings for lua
+})
+
+vim.lsp.enable("clangd")
+
+-- =========================
+-- PYRIGHT
+-- =========================
+vim.lsp.config("pyright", {
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+vim.lsp.enable("pyright")
+
+-- =========================
+-- LUA LS
+-- =========================
+vim.lsp.config("lua_ls", {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
     Lua = {
-      -- make the language server recognize "vim" global
+      runtime = {
+        version = "LuaJIT",
+      },
       diagnostics = {
         globals = { "vim" },
       },
       workspace = {
-        -- make language server aware of runtime files
-        library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.stdpath("config") .. "/lua"] = true,
-        },
-	checkThirdParty = false,
+        checkThirdParty = false,
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
       },
     },
   },
 })
+
+vim.lsp.enable("lua_ls")

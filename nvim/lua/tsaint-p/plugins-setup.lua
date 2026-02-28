@@ -64,7 +64,7 @@ local plugins = {
   "neovim/nvim-lspconfig", -- easily configure language servers
   "hrsh7th/cmp-nvim-lsp", -- for autocompletion
   {
-    "glepnir/lspsaga.nvim",
+    "nvimdev/lspsaga.nvim",
     branch = "main",
     requires = {
       { "nvim-tree/nvim-web-devicons" },
